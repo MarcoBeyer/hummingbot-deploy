@@ -7,8 +7,6 @@ services:
       - AUTH_SYSTEM_ENABLED=False
       - BACKEND_API_HOST=hummingbot-api
       - BACKEND_API_PORT=8000
-      - BACKEND_API_USERNAME=${USERNAME}
-      - BACKEND_API_PASSWORD=${PASSWORD}
     volumes:
       - ./pages:/home/dashboard/frontend/pages
   hummingbot-api:
@@ -18,12 +16,11 @@ services:
     volumes:
       - ./bots:/hummingbot-api/bots
       - /var/run/docker.sock:/var/run/docker.sock
-    env_file:
-      - .env
     environment:
       # Override specific values for Docker networking
       - BROKER_HOST=emqx
-      - DATABASE_URL=postgresql+asyncpg://hbot:hummingbot-api@postgres:5432/hummingbot_api
+      - DATABASE_URL=${DATABASE_URL}
+      #postgresql+asyncpg://hbot:hummingbot-api@postgres:5432/hummingbot_api
     #depends_on:
     #  - postgres
   emqx:
@@ -62,7 +59,7 @@ services:
       - OAUTH2_PROXY_COOKIE_SECRET=${OAUTH_COOKIE_SECRET}
       - OAUTH2_PROXY_GITHUB_USERS=${OAUTH_GITHUB_USERS}
       - OAUTH2_PROXY_UPSTREAMS=http://dashboard:8501
-      - OAUTH2_PROXY_REDIRECT_URL=${OAUTH_REDIRECT_URL}
+      - OAUTH2_PROXY_REDIRECT_URL=${SERVICE_URL_OAUTH2_PROXY_DASHBOARD/oauth2/callback}
       - OAUTH2_PROXY_HTTP_ADDR=0.0.0.0:8080
     #ports:
     #  - "8080:8080"
@@ -77,7 +74,7 @@ services:
       - OAUTH2_PROXY_COOKIE_SECRET=${OAUTH_COOKIE_SECRET}
       - OAUTH2_PROXY_GITHUB_USERS=${OAUTH_GITHUB_USERS}
       - OAUTH2_PROXY_UPSTREAMS=http://hummingbot-api:8000
-      - OAUTH2_PROXY_REDIRECT_URL=${OAUTH_REDIRECT_URL}
+      - OAUTH2_PROXY_REDIRECT_URL=${SERVICE_URL_OAUTH2_PROXY_API/oauth2/callback}
       - OAUTH2_PROXY_HTTP_ADDR=0.0.0.0:8080
     #ports:
     #  - "8080:8080"
