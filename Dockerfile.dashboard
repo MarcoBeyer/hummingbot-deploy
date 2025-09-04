@@ -1,0 +1,10 @@
+# Custom dashboard image with pages copied in
+FROM hummingbot/dashboard:latest
+
+# Copy the local pages directory into the container
+COPY ./pages /home/dashboard/frontend/pages
+
+# Ensure proper permissions
+USER root
+RUN chown -R dashboard:dashboard /home/dashboard/frontend/pages
+USER dashboard
