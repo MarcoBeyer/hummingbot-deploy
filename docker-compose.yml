@@ -61,7 +61,7 @@ services:
       - OAUTH2_PROXY_EMAIL_DOMAINS=*
       - OAUTH2_PROXY_UPSTREAMS=http://dashboard:8501
       - OAUTH2_PROXY_REDIRECT_URL=${SERVICE_URL_OAUTH2_PROXY_DASHBOARD}/oauth2/callback
-      - OAUTH2_PROXY_HTTP_ADDR=0.0.0.0:8080
+      - OAUTH2_PROXY_HTTP_ADDRESS=0.0.0.0:8080
     #ports:
     #  - "8080:8080"
     depends_on:
@@ -77,7 +77,7 @@ services:
       - OAUTH2_PROXY_EMAIL_DOMAINS=*
       - OAUTH2_PROXY_UPSTREAMS=http://hummingbot-api:8000
       - OAUTH2_PROXY_REDIRECT_URL=${SERVICE_URL_OAUTH2_PROXY_API}/oauth2/callback
-      - OAUTH2_PROXY_HTTP_ADDR=0.0.0.0:8080
+      - OAUTH2_PROXY_HTTP_ADDRESS=0.0.0.0:8080
     #ports:
     #  - "8080:8080"
     depends_on:
