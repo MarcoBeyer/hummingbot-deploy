@@ -3,8 +3,3 @@ FROM hummingbot/hummingbot-api:latest
 
 # Copy the local bots directory into the container
 COPY ./bots /hummingbot-api/bots
-
-# Ensure proper permissions
-USER root
-RUN chown -R hummingbot:hummingbot /hummingbot-api/bots
-USER hummingbot
